@@ -11,17 +11,26 @@ const makeGrid = (size) => {
     for (let i = 0; i < (size * size); i++) {
         const square = document.createElement("div");
         container.appendChild(square).classList.add("square");
+        container.addEventListener("mouseover", dye);;
     };
- 
-    const squares = document.querySelectorAll(".square");
-    squares.forEach((square) => {
-        square.addEventListener("mousemove", () => {
-            square.setAttribute("style", `background-color: ${defaultColor}`);
-        });
-    });
 };
 
+const dye = (e) => {
+    e.target.style.backgroundColor = defaultColor;
+}
+
 makeGrid(defaultSize);
+
+// Color picker
+const colorPicker = document.getElementById("colorPicker");
+colorPicker.addEventListener("input", (e) => {
+    defaultColor = e.target.value;
+})
+
+const color = document.getElementById("color");
+color.addEventListener("click", () => {
+    defaultColor = colorPicker.value;
+})
 
 // Slider defines the grid size
 const slider = document.getElementById("grid-slider");
