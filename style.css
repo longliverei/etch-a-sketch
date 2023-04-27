@@ -97,3 +97,9 @@ button {
     box-shadow: 5px 10px;
     font-weight: bold;
 }
+
+footer {
+    color: rgb(112, 80, 41);
+    font-weight: bold;
+    font-size: 1.5em;
+}
