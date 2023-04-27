@@ -1,7 +1,8 @@
 const container = document.querySelector("#grid-container");
 const defaultSize = 16;
-let color = `background-color: black`;
+let defaultColor = `black`;
 
+// Make the grid
 const makeGrid = (size) => {
     container.innerHTML = "";
     container.style.setProperty("--grid-rows", size);
@@ -14,14 +15,15 @@ const makeGrid = (size) => {
  
     const squares = document.querySelectorAll(".square");
     squares.forEach((square) => {
-        square.addEventListener("click", () => {
-            square.setAttribute("style", color);
+        square.addEventListener("mousemove", () => {
+            square.setAttribute("style", `background-color: ${defaultColor}`);
         });
     });
 };
 
 makeGrid(defaultSize);
 
+// Slider defines the grid size
 const slider = document.getElementById("grid-slider");
 const value = document.getElementById("output");
 
@@ -32,10 +34,17 @@ const update = () => {
 
 value.innerHTML = `${slider.value} x ${slider.value}`;
 
+slider.addEventListener("input", update);
+
+// Eraser button
 const eraser = document.getElementById("eraser");
 eraser.addEventListener("click", () => {
-    color = `background-color: white`;
+    defaultColor = `white`;
 })
 
-
-slider.addEventListener("input", update);
+// clear button
+const clear = document.getElementById("clear");
+clear.addEventListener("click", () => {
+    container.innerHTML = "";
+    makeGrid(slider.value);
+})
