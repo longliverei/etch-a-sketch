@@ -1,8 +1,6 @@
 const container = document.querySelector("#grid-container");
-const slider = document.getElementById("grid-slider");
-const value = document.getElementById("output");
-const color = "black";
 const defaultSize = 16;
+let color = `background-color: black`;
 
 const makeGrid = (size) => {
     container.innerHTML = "";
@@ -13,21 +11,31 @@ const makeGrid = (size) => {
         const square = document.createElement("div");
         container.appendChild(square).classList.add("square");
     };
-
+ 
     const squares = document.querySelectorAll(".square");
     squares.forEach((square) => {
         square.addEventListener("click", () => {
-            square.setAttribute("style", `background-color: ${color}`)
-        })
-    })
-    
+            square.setAttribute("style", color);
+        });
+    });
 };
 
 makeGrid(defaultSize);
 
+const slider = document.getElementById("grid-slider");
+const value = document.getElementById("output");
+
 const update = () => {
+    value.innerHTML = `${slider.value} x ${slider.value}`;
     makeGrid(slider.value);
 }
+
+value.innerHTML = `${slider.value} x ${slider.value}`;
+
+const eraser = document.getElementById("eraser");
+eraser.addEventListener("click", () => {
+    color = `background-color: white`;
+})
 
 
 slider.addEventListener("input", update);
